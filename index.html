@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List | By Fatiya</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
+    <link rel="icon" type="image/png" href="assets/love.png">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">To-Do List</h1>
+
+        <!-- Motivation Card -->
+        <div class="motivation-wrapper">
+            <img src="assets/love.png" alt="Love Icon" class="pixel-love" />
+
+            <div class="motivation-card">
+                <h3>hey you!</h3>
+                <p>You don't have to do everything today. Just the next thing. One task, one breath, one small checkbox
+                    at a time. You've got this.</p>
+            </div>
+        </div>
+
+
+        <!-- Add Task Form -->
+        <!-- Gambar karakter di atas form -->
+        <div class="form-character-wrapper">
+            <img src="assets/kartun.png" alt="Character" class="form-character" />
+        </div>
+
+        <!-- Form Input Task -->
+        <div class="add-task-container">
+            <form id="taskForm">
+
+                <!-- Task Title -->
+                <div class="form-group-horizontal">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-pen-to-square form-icon"></i>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="taskTitle" class="form-label">Add a New Task</label>
+                        <input type="text" id="taskTitle" class="form-input" placeholder="Enter task title..." required>
+                    </div>
+                </div>
+
+                <!-- Task Date -->
+                <div class="form-group-horizontal">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-calendar-days form-icon"></i>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="taskDate" class="form-label">Date</label>
+                        <input type="date" id="taskDate" class="form-input">
+                    </div>
+                </div>
+
+                <button type="submit" class="add-button">Add New</button>
+            </form>
+        </div>
+
+        <!-- Filter & Status -->
+        <div class="status-section">
+            <button class="status-button"   >Work In Progress</button>
+        </div>
+
+        <div class="controls">
+            <button class="filter-button" onclick="toggleFilter()">
+                <span>Filter</span>
+                <i class="fa-solid fa-filter" style="margin-left: 8px;"></i>
+            </button>
+
+            <button class="delete-button" onclick="deleteAllTasks()">
+                <span>Delete</span>
+                <i class="fa-solid fa-ban" style="margin-left: 8px;"></i>
+            </button>
+        </div>
+
+
+        <!-- Task Table -->
+        <div class="task-table">
+            <div class="table-header">
+                <div>Task</div>
+                <div>Due Date</div>
+                <div>Status</div>
+                <div>Action</div>
+            </div>
+            <div class="table-body" id="taskTableBody">
+                <div class="empty-state">No tasks yet! Add your first task above.</div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        <div class="social-links">
+            <a href="#" aria-label="GitHub" class="social-icon">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="#" aria-label="LinkedIn" class="social-icon">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" aria-label="Instagram" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        <div class="footer-text">Created By Fatiya Labibah | © 2025</div>
+    </div>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+</body>
+
+</html>

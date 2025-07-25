@@ -1,0 +1,896 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-bg: #f3f7d9;
+    --card-bg: #EAE297;
+    --form-bg: #FFFBD7;
+    --input-bg: #eae5ab;
+    --button-bg: #8aac7b;
+    --border-main: #d9c35a;
+    --border-form: #d2c487;
+    --text-main: #333;
+    --text-heading: #6C9B64;
+    --text-subheading: #50664C;
+    --text-label: #9DA55D;
+    --table-bg: #fffad2;
+    --table-border: #c8c08c;
+    --button-secondary: #fef3cf;
+}
+
+body {
+    font-family: 'Pixelify Sans', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: var(--text-heading);
+}
+
+/* Motivation Card */
+.motivation-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-top: 30px;
+    width: 100%;
+}
+
+/* Love icon image di atas card */
+.pixel-love {
+    position: absolute;
+    top: -35px;
+    left: -10px;
+    width: 80px;
+    z-index: 2;
+}
+
+.motivation-card {
+    font-family: 'Poppins', sans-serif;
+    background: var(--card-bg);
+    padding: 25px;
+    padding-left: 40px;
+    border-radius: 20px;
+    border: 2px solid var(--border-main);
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.motivation-card h3 {
+    font-size: 20px;
+    color: var(--text-subheading);
+    font-family: 'Pixelify Sans', sans-serif;
+    margin: 0 0 8px;
+}
+
+.motivation-card p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Add Task Form */
+.form-character-wrapper img {
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    padding-left: 25px;
+}
+
+.add-task-container {
+    background: var(--form-bg);
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid #9DA55D;
+    margin-bottom: 60px;
+}
+
+/* Input with Icon */
+.form-group-horizontal {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 10px;
+}
+
+.icon-wrapper {
+    flex-shrink: 0;
+    width: 35px;
+    height: 35px;
+    /* background-color: #eae5ab; */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    padding: 3px;
+}
+
+.icon-wrapper i {
+    margin-top: 11px;
+    font-size: 35px;
+    color: #9DA55D;
+}
+
+.form-icon {
+    color: #9DA55D;
+    font-size: 16px;
+}
+
+.input-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--text-label);
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+.form-input {
+    padding: 8px;
+    border: 2px solid #9DA55D;
+    border-radius: 8px;
+    background-color: #EAE297;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Buttons */
+.add-button {
+    font-size: 16px;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--button-bg);
+    color: #FFFBD7;
+    border-color: #747360;
+    border-radius: 16px;
+    font-family: 'Pixelify Sans', sans-serif;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.status-section {
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.status-button {
+    background: #FFF9BD;
+    border: 2px solid var(--border-form);
+    padding: 10px 30px;
+    font-family: 'Pixelify Sans', sans-serif;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #9DA55D;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+
+.filter-button,
+.delete-button {
+    font-family: 'Pixelify Sans', sans-serif;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    color: #9DA55D;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.filter-button {
+    background: #FFF9BD;
+    border: 2px solid #9DA55D;
+}
+
+.delete-button {
+    background-color: #FFD6BA;
+    color: #FF726D;
+    border: 2px solid #FF726D;
+}
+
+/* Table */
+.task-table {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #9DA55D;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: #9DA55D; 
+    color: #FFF9BD;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #dcd67f;
+}
+
+.table-body {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    background-color: #FFF9BD;
+    padding: 8px 0;
+    border-top: none;
+    row-gap: 1px;
+}
+
+.table-body > div {
+    border-right: 1px solid #e2dd9e;
+    padding: 8px 0;
+    font-size: 12px;
+}
+
+.table-body > div:nth-child(4n) {
+    border-right: none;
+}
+
+.empty-state {
+    font-family: Poppins, sans-serif;
+    grid-column: span 4;
+    padding: 16px;
+    color: #777;
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* Footer */
+.footer {
+    background-color: #a2a35d; 
+    color: #ececc6; 
+    padding: 30px 20px;
+    text-align: center;
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 15px;
+}
+
+.social-icon {
+    font-size: 24px;
+    color: #ececc6;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+    color: #fff;
+}
+
+.footer-text {
+    font-size: 12px;
+    color: #ececc6;
+}
+
+/* Tablet Styles (768px and above) */
+@media screen and (min-width: 768px) {
+    .container {
+        padding: 40px;
+    }
+    
+    .title {
+        font-size: 40px;
+        margin-bottom: 70px;
+    }
+    
+    .pixel-love {
+        top: -50px;
+        left: -70px;
+        width: 20%;
+    }
+    
+    .motivation-card {
+        padding: 30px 50px 30px;
+        border-radius: 25px;
+        margin-bottom: 45px;
+    }
+    
+    .motivation-card h3 {
+        font-size: 24px;
+    }
+    
+    .motivation-card p {
+        font-size: 16px;
+    }
+    
+    .form-character-wrapper img {
+        width: 18%;
+        padding-left: 25px;
+    }
+    
+    .add-task-container {
+        padding: 26px;
+        border-radius: 25px;
+        margin-bottom: 24px;
+    }
+    
+    .form-group-horizontal {
+        margin-bottom: 20px;
+        gap: 12px;
+    }
+    
+    .icon-wrapper {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        margin-top: 25px;
+    }
+    
+    .form-icon {
+        font-size: 20px;
+    }
+    
+    .form-label {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .form-input {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .add-button {
+        font-size: 16px;
+        padding: 13px;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+    
+    .status-section {
+        margin: 70px 0 22px;
+    }
+    
+    .status-button {
+        padding: 12px 70px;
+        border-radius: 12px;
+        font-size: 18px;
+    }
+    
+    .controls {
+        gap: initial;
+    }
+    
+    .filter-button,
+    .delete-button {
+        padding: 7px 25px;
+        font-size: 16px;
+    }
+    
+    .table-header {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+    
+    .table-body {
+        padding: 12px 0;
+    }
+    
+    .table-body > div {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+    
+    .social-links {
+        gap: 45px;
+        margin-bottom: 25px;
+    }
+    
+    .social-icon {
+        font-size: 28px;
+    }
+    
+    .footer-text {
+        font-size: 14px;
+    }
+}
+
+/* Large Tablet/Desktop Styles */
+@media screen and (min-width: 1024px) {
+    .container {
+        padding: 70px;
+    }
+}
+
+
+/* --- Mulai bagian tambahan untuk styling dinamis --- */
+
+/* Task Row Styling (dari JS) */
+.task-row:nth-child(even) {
+    background-color: #fff8c7;
+}
+.task-row:hover {
+    background-color: #f7f4b2;
+}
+/* Status Dropdown (dari JS) */
+.status-select {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    min-width: 80px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif; /* Tambahkan font yang konsisten */
+}
+.status-select.pending {
+    background-color: #fce3e3;
+    color: #a94442;
+    border: #a94442 1px solid;
+}
+.status-select.ongoing {
+    background-color: #fff6c1;
+    color: #c1a600;
+    border: #c1a600 1px solid;
+}
+.status-select.done {
+    background-color: #d2f7cb;
+    color: #3d8b4c;
+    border: #3d8b4c 1px solid;
+}
+/* Action Buttons (dari JS) */
+/* Action Buttons */
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
+
+.delete-btn {
+    color: #FFF9BD;
+    background-color: #FF726D;
+}
+
+.edit-btn {
+    color: #FFF9BD;
+    background-color: #9DA55D;
+}
+
+.done-btn {
+    color: #FFF9BD;
+    background-color: #A3DC9A;
+}
+/* Modal Overlay (dari JS) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+/* Edit Modal (dari JS) */
+.modal-content {
+    background: linear-gradient(135deg, #fff9c4, #f0f8d0);
+    border-radius: 15px;
+    padding: 24px;
+    width: 90%;
+    max-width: 450px;
+    border: 2px solid #e8e8e8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    color: #6b7280;
+}
+.modal-icon {
+    font-size: 20px;
+}
+.modal-header h3 {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    color: #8b9467;
+    font-size: 14px;
+    margin-top: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    background-color: #c8d4a3;
+    border-radius: 12px;
+    padding: 12px 16px;
+    gap: 12px;
+}
+.input-icon {
+    font-size: 16px;
+}
+.input-group input {
+    border: none;
+    background: transparent;
+    outline: none;
+    flex: 1;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+.input-group input::placeholder {
+    color: #666;
+}
+.update-btn {
+    width: 100%;
+    background-color: #8fbc8f;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.2s ease;
+}
+.update-btn:hover {
+    background-color: #7ba87b;
+}
+/* Confirmation Modal (dari JS) */
+.confirmation-modal {
+    background: #FFFBD7;
+    color: #FF726D;
+    border-radius: 15px;
+    padding: 24px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border: 2px solid #e8e8e8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.confirmation-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: #FF726D;
+}
+.confirmation-icon {
+    font-size: 24px;
+}
+.confirmation-header h3 {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.confirmation-message {
+    color: #666;
+    margin-bottom: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+.confirmation-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+.confirm-btn, .cancel-btn {
+    padding: 10px 50px;
+    gap: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.confirm-btn {
+    background-color: #FFD6BA;
+    color: #FF726D;
+}
+.confirm-btn:hover {
+    background-color: #FF726D;
+    color: #FFD6BA;
+}
+.cancel-btn {
+    border: #FF726D 2px solid;
+    background-color: #FFFBD7;
+    color: #FF726D;
+}
+.cancel-btn:hover {
+    background-color: #FFD6BA;
+}
+/* Enhanced Notifications (dari JS) */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1100;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    border: 2px solid;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    max-width: 320px;
+    min-width: 280px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+.notification.success {
+    background-color: #d9f8dc;
+    border-color: #a4e6b1;
+    color: #2f7036;
+}
+.notification.error {
+    background-color: #ffe5e5;
+    border-color: #f5bcbc;
+    color: #b74242;
+}
+.notification.info {
+    background-color: #e2f0ff;
+    border-color: #a2cbe3;
+    color: #326b9c;
+}
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.notification-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+.notification-text {
+    flex: 1;
+}
+/* Responsive untuk elemen dinamis */
+@media (max-width: 767px) {
+    .notification {
+        left: 20%;
+        transform: translateX(-50%);
+        width: 90%; 
+        max-width: 350px; 
+    }
+
+    .modal-content, .confirmation-modal {
+        width: 95%;
+        margin: 20px;
+    }
+
+    .task-table-header,
+    .task-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr; 
+        gap: 6px;
+        padding: 0 8px;
+        font-size: 12px;
+    }
+
+    .task-cell {
+        font-size: 12px;
+        padding: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .task-cell--actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .status-select {
+        font-size: 11px;
+        padding: 6px 10px;
+        min-width: 70px;
+        border-radius: 12px;
+    }
+
+    .action-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+    }
+}
+
+/* === Gaya untuk Elemen yang Dibuat oleh JS === */
+.task-cell {
+    padding: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    word-break: break-word; /* Untuk judul agar tidak keluar dari kotak */
+    display: flex; 
+    align-items: center; 
+}
+
+.task-cell--actions {
+    justify-content: center; 
+    gap: 8px;
+}
+
+/* Penataan khusus untuk sel Status (dropdown) */
+.task-cell--status {
+    justify-content: center; 
+}
+
+.empty-state {
+    grid-column: span 4; 
+}
+
+.modal-overlay.is-visible {
+    display: flex; 
+}
+
+@media (max-width: 500px) {
+    .task-table-header,
+    .task-row {
+        font-size: 9px;
+        gap: 3px;
+        padding: 0 2px;
+    }
+
+    .task-cell {
+        padding: 4px;
+        font-size: 9px;
+    }
+
+    .status-select {
+        font-size: 9px;
+        padding: 3px 6px;
+        min-width: 58px;
+    }
+
+    .action-btn {
+        width: 18px;
+        height: 18px;
+        font-size: 9px;
+    }
+
+    .task-cell svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .modal-content,
+    .confirmation-modal {
+        width: 80%;
+        padding: 12px;
+        font-size: 11px;
+        margin: 30px;
+    }
+
+    .update-btn,
+    .confirm-btn,
+    .cancel-btn {
+        font-size: 11px;
+        padding: 8px 12px;
+    }
+
+    .modal-header h3,
+    .confirmation-header h3 {
+        font-size: 14px;
+    }
+
+    .confirmation-message {
+        font-size: 10px;
+        margin-bottom: 12px;
+    }
+
+    .input-group input {
+        font-size: 11px;
+    }
+
+    .notification {
+        padding: 8px 12px;
+        font-size: 11px;
+        min-width: 200px;
+        max-width: 240px;
+    }
+
+    .notification-icon {
+        font-size: 14px;
+    }
+
+    .notification-content {
+        gap: 6px;
+    }
+
+    .notification-text {
+        font-size: 11px;
+    }
+
+    .action-group {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        flex-wrap: nowrap;
+    }
+
+    .confirmation-body {
+    flex-direction: column; 
+    gap: 12px;
+    text-align: center;
+}
+
+.confirmation-message {
+    text-align: center; 
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.confirmation-buttons {
+    flex-direction: column; 
+    gap: 8px;
+    align-items: stretch;
+}
+
+.confirmation-buttons button {
+    width: 100%; 
+}
+}
+
+/* Horizontal scroll untuk grid jika terlalu sempit */
+.task-table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.task-table-header,
+.task-row {
+    min-width: 480px;
+}
