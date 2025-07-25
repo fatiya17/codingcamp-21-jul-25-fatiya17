@@ -58,7 +58,7 @@ Menampilkan antarmuka daftar tugas yang sederhana dan responsif — pengguna dap
 
 ## 👩‍💻 Tentang Pengembang
 
-Proyek ini dikembangkan untuk memenuhi Ujian Akhir Semester (UAS) mata kuliah **Pemrograman Frontend**.
+Proyek ini dibuat untuk menyelesaikan Mini Project Coding Camp oleh **RevoU**, bulan Juli 2025.
 
 **Pengembang**:  
 🧑‍💻 *Fatiya Labibah*  
