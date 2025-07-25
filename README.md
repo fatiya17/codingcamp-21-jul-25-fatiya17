@@ -42,3 +42,24 @@ Aplikasi web **To-Do List** sederhana namun fungsional yang dibuat sebagai mini-
 │   ├── edit-modal.png
 │   └── delete-confirmation.png
 └── index.html
+```
+
+## 📸 Tampilan Aplikasi
+Menampilkan antarmuka daftar tugas yang sederhana dan responsif — pengguna dapat menambahkan, mengedit, memfilter berdasarkan status (aktif/selesai), serta menghapus tugas.
+![One page Page](assets/tampilan-aplikasi.png)
+
+## 🧪 Status Pengembangan
+| Fitur               | Status | Keterangan                                                  |
+|---------------------|--------|-------------------------------------------------------------|
+| 🔍 Filter           | ✅    | Sudah berjalan real-time berbasis keyword                   |
+| ✏️ Edit Tugas       | ✅    | Edit teks dan tanggal tugas                                 |
+| ➕ Tambah Tugas     | ✅    | Upload + preview + menyimpan ke database secara realtime    |
+| 🛡️ Validasi Form    | ✅    | Validasi dasar tersedia, namun belum semua bersifat wajib   |
+
+## 👩‍💻 Tentang Pengembang
+
+Proyek ini dikembangkan untuk memenuhi Ujian Akhir Semester (UAS) mata kuliah **Pemrograman Frontend**.
+
+**Pengembang**:  
+🧑‍💻 *Fatiya Labibah*  
+🎓  *Coding Camp RevoU - 21 Jul 25*  
