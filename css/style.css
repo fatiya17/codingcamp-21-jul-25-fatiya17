@@ -293,9 +293,10 @@ body {
 .empty-state {
     grid-column: 1 / -1;
     padding: 20px;
+    font-size: 10px;
     font-family: 'Poppins', sans-serif;
     text-align: center;
-    color: #777;
+    color: #b0b090;
     font-style: italic;
 }
 
@@ -764,7 +765,7 @@ body {
 /* Very Small Mobile (500px and below) */
 @media (max-width: 500px) {
     .task-cell {
-        padding: 13px;
+        padding: 6px;
         font-size: 13px;
     }
 
@@ -860,87 +861,128 @@ body {
     }
 }
 
-/* Large Desktop Styles (1024px and above) */
-@media screen and (min-width: 1024px) {
+/* Tablet Styles (768px and above) */
+@media screen and (min-width: 768px) {
     .container {
-        padding: 70px;
+        padding: 40px;
     }
 
-    /* Keep original grid layout for desktop */
-    .task-table {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        background-color: #FFF9BD;
-        min-width: 480px;
+    .title {
+        font-size: 40px;
+        margin-bottom: 70px;
+    }
+
+    .pixel-love {
+        top: -50px;
+        left: -70px;
+        width: 20%;
+    }
+
+    .motivation-card {
+        padding: 30px 50px 30px;
+        border-radius: 25px;
+        margin-bottom: 45px;
+    }
+
+    .motivation-card h3 {
+        font-size: 24px;
+    }
+
+    .motivation-card p {
+        font-size: 16px;
+    }
+
+    .form-character-wrapper img {
+        width: 18%;
+        padding-left: 25px;
+    }
+
+    .add-task-container {
+        padding: 26px;
+        border-radius: 25px;
+        margin-bottom: 24px;
+    }
+
+    .form-group-horizontal {
+        margin-bottom: 20px;
+        gap: 12px;
+    }
+
+    .icon-wrapper {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        margin-top: 25px;
+    }
+
+    .form-icon {
+        font-size: 20px;
+    }
+
+    .form-label {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .form-input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .add-button {
+        font-size: 16px;
+        padding: 13px;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+
+    .status-section {
+        margin: 70px 0 22px;
+    }
+
+    .status-button {
+        padding: 12px 70px;
         border-radius: 12px;
-        overflow: hidden;
-        border: 2px solid #9DA55D;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        margin-bottom: 30px;
+        font-size: 18px;
     }
 
-    .table-header {
-        display: contents;
+    .controls {
+        gap: initial;
+    }
+
+    .filter-button,
+    .delete-button {
+        padding: 7px 25px;
+        font-size: 16px;
     }
 
     .table-header > div {
-        background-color: #9DA55D;
-        color: #FFF9BD;
         font-size: 16px;
-        text-align: center;
         padding: 10px 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 1px solid #dcd67f;
-    }
-
-    .table-body {
-        display: contents;
-    }
-
-    .task-row {
-        display: contents;
     }
 
     .task-cell {
         padding: 12px 0;
         font-size: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 1px solid #e2dd9e;
-        border-right: 1px solid #e2dd9e;
-        background-color: transparent;
-        word-break: break-word;
     }
 
-    .task-cell::before {
-        display: none;
+    .social-links {
+        gap: 45px;
+        margin-bottom: 25px;
     }
 
-    .task-row:nth-child(even) .task-cell {
-        background-color: #f7f2b9;
+    .social-icon {
+        font-size: 28px;
     }
 
-    .task-row:hover .task-cell {
-        background-color: #f7f4b2;
+    .footer-text {
+        font-size: 14px;
     }
+}
 
-    .task-row:last-child .task-cell {
-        border-bottom: none;
-    }
-
-    .task-cell:nth-child(4n) {
-        border-right: none;
-    }
-
-    .task-cell--actions {
-        gap: 8px;
-        justify-content: center;
-    }
-
-    .task-cell--status {
-        justify-content: center;
+/* Large Tablet/Desktop Styles */
+@media screen and (min-width: 1024px) {
+    .container {
+        padding: 70px;
     }
 }
