@@ -150,38 +150,34 @@ function getEmptyStateMessage() {
 // Create task row element
 function createTaskRow(task) {
     const row = document.createElement('div');
-    row.className = 'task-row';
-    row.style.display = 'contents';
+    row.className = 'task-row'; // Just the class name, no inline style
 
     // Task title
-const titleCell = document.createElement('div');
-titleCell.textContent = task.title;
-titleCell.className = 'task-cell';
+    const titleCell = document.createElement('div');
+    titleCell.textContent = task.title;
+    titleCell.className = 'task-cell';
+    titleCell.setAttribute('data-label', 'Task'); // Data label for mobile view
 
     // Due date
-const dateCell = document.createElement('div');
-dateCell.textContent = formatDate(task.date);
-dateCell.className = 'task-cell';
+    const dateCell = document.createElement('div');
+    dateCell.textContent = formatDate(task.date);
+    dateCell.className = 'task-cell';
+    dateCell.setAttribute('data-label', 'Due Date'); // Data label for mobile view
 
     // Status dropdown
-const statusCell = document.createElement('div');
-statusCell.className = 'task-cell task-cell--status';
+    const statusCell = document.createElement('div');
+    statusCell.className = 'task-cell task-cell--status';
+    statusCell.setAttribute('data-label', 'Status'); // Data label for mobile view
     const statusSelect = document.createElement('select');
     statusSelect.value = task.status;
     statusSelect.className = `status-select ${task.status}`;
-statusSelect.addEventListener('change', function() {
-    // 1. Dapatkan status lama dari class sebelum diubah
-    const oldStatus = task.status; 
-    
-    // 2. Panggil fungsi untuk memperbarui data di array
-    updateTaskStatus(task.id, this.value);
-
-    // 3. Perbarui tampilan secara langsung tanpa render ulang total
-    // Cek dulu apakah elemen masih ada di DOM (karena logika filter)
-    if (this.parentElement) { 
-        this.className = `status-select ${this.value}`;
-    }
-});
+    statusSelect.addEventListener('change', function() {
+        const oldStatus = task.status;
+        updateTaskStatus(task.id, this.value);
+        if (this.parentElement) {
+            this.className = `status-select ${this.value}`;
+        }
+    });
     const statusOptions = [
         { value: 'pending', text: 'Pending' },
         { value: 'ongoing', text: 'Ongoing' },
@@ -196,35 +192,30 @@ statusSelect.addEventListener('change', function() {
     statusCell.appendChild(statusSelect);
 
     // Action buttons
-const actionCell = document.createElement('div');
-actionCell.className = 'task-cell task-cell--actions';
+    const actionCell = document.createElement('div');
+    actionCell.className = 'task-cell task-cell--actions';
+    actionCell.setAttribute('data-label', 'Action'); // Data label for mobile view
 
     // Delete button (red X)
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'action-btn delete-btn';
-    deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'; 
+    deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
     deleteBtn.title = 'Delete task';
-    deleteBtn.addEventListener('click', function() {
-        showDeleteConfirmation(task.id);
-    });
+    deleteBtn.addEventListener('click', () => showDeleteConfirmation(task.id));
 
     // Edit button (pencil)
     const editBtn = document.createElement('button');
     editBtn.className = 'action-btn edit-btn';
-    editBtn.innerHTML = '<i class="fa-solid fa-pencil"></i>'; 
+    editBtn.innerHTML = '<i class="fa-solid fa-pencil"></i>';
     editBtn.title = 'Edit task';
-    editBtn.addEventListener('click', function() {
-        openEditModal(task);
-    });
+    editBtn.addEventListener('click', () => openEditModal(task));
 
     // Done button (checkmark)
     const doneBtn = document.createElement('button');
     doneBtn.className = 'action-btn done-btn';
-    doneBtn.innerHTML = '<i class="fa-solid fa-check"></i>'; 
+    doneBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
     doneBtn.title = 'Mark as done';
-    doneBtn.addEventListener('click', function() {
-        showDoneConfirmation(task.id);
-    });
+    doneBtn.addEventListener('click', () => showDoneConfirmation(task.id));
 
     actionCell.appendChild(deleteBtn);
     actionCell.appendChild(editBtn);
@@ -259,7 +250,7 @@ function updateTaskStatus(taskId, newStatus) {
         saveTasksToStorage();
 
         if (filterStatus !== 'all' && oldStatus !== newStatus) {
-            renderTasks(); // Panggil renderTasks hanya jika task harus hilang dari tampilan filter
+            renderTasks(); // Re-render if the task should disappear from the current filter
         }
         
         showNotification(`Task status updated to ${newStatus}`, 'success');
@@ -303,7 +294,6 @@ function createEditModal() {
     `;
     document.body.appendChild(modal);
 
-    // Tambahkan event listener untuk form di dalam modal
     const editTaskForm = document.getElementById('editTaskForm');
     editTaskForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -339,13 +329,8 @@ function updateTaskFromModal() {
     const title = titleInput.value.trim();
     const date = dateInput.value;
     
-    if (!title) {
-        showNotification('Please enter a task title', 'error');
-        return;
-    }
-    
-    if (!date) {
-        showNotification('Please select a due date', 'error');
+    if (!title || !date) {
+        showNotification('Please fill in all fields', 'error');
         return;
     }
     
@@ -356,35 +341,30 @@ function updateTaskFromModal() {
 
 // Show delete confirmation
 function showDeleteConfirmation(taskId) {
-    const task = tasks.find(t => t.id === taskId);
     showConfirmationModal(
         'Delete Confirmation',
         `Are you sure you want to delete this task?`,
         '<i class="fa-solid fa-triangle-exclamation"></i>',
         'Delete',
         'Cancel',
-        () => deleteTask(taskId),
-        () => {}
+        () => deleteTask(taskId)
     );
 }
 
 // Show done confirmation
 function showDoneConfirmation(taskId) {
-    const task = tasks.find(t => t.id === taskId);
     showConfirmationModal(
         'Done Task',
         `Ready to check it off?`,
         '<i class="fa-solid fa-clipboard-check"></i>',
         'Done',
         'Not yet',
-        () => markTaskAsDone(taskId),
-        () => {}
+        () => markTaskAsDone(taskId)
     );
 }
 
 // Generic confirmation modal
-function showConfirmationModal(title, message, icon, confirmText, cancelText, onConfirm, onCancel) {
-    // Remove existing modal
+function showConfirmationModal(title, message, icon, confirmText, cancelText, onConfirm) {
     const existingModal = document.getElementById('confirmModal');
     if (existingModal) {
         existingModal.remove();
@@ -392,7 +372,7 @@ function showConfirmationModal(title, message, icon, confirmText, cancelText, on
     
     const modal = document.createElement('div');
     modal.id = 'confirmModal';
-    modal.className = 'modal-overlay';
+    modal.className = 'modal-overlay is-visible';
     modal.innerHTML = `
         <div class="confirmation-modal">
             <div class="confirmation-header">
@@ -401,36 +381,19 @@ function showConfirmationModal(title, message, icon, confirmText, cancelText, on
             </div>
             <p class="confirmation-message">${message}</p>
             <div class="confirmation-buttons">
-                <button class="confirm-btn" onclick="handleConfirm()">${confirmText}</button>
-                <button class="cancel-btn" onclick="handleCancel()">${cancelText}</button>
+                <button id="confirmBtn" class="confirm-btn">${confirmText}</button>
+                <button id="cancelBtn" class="cancel-btn">${cancelText}</button>
             </div>
         </div>
     `;
     
-    // Store callbacks
-    modal.onConfirm = onConfirm;
-    modal.onCancel = onCancel;
-    
     document.body.appendChild(modal);
-    modal.style.display = 'flex';
-}
 
-// Handle confirmation
-function handleConfirm() {
-    const modal = document.getElementById('confirmModal');
-    if (modal && modal.onConfirm) {
-        modal.onConfirm();
-    }
-    closeConfirmationModal();
-}
-
-// Handle cancel
-function handleCancel() {
-    const modal = document.getElementById('confirmModal');
-    if (modal && modal.onCancel) {
-        modal.onCancel();
-    }
-    closeConfirmationModal();
+    document.getElementById('confirmBtn').onclick = () => {
+        onConfirm();
+        closeConfirmationModal();
+    };
+    document.getElementById('cancelBtn').onclick = closeConfirmationModal;
 }
 
 // Close confirmation modal
@@ -443,13 +406,8 @@ function closeConfirmationModal() {
 
 // Mark task as done
 function markTaskAsDone(taskId) {
-    const task = tasks.find(t => t.id === taskId);
-    if (task) {
-        task.status = 'done';
-        saveTasksToStorage();
-        renderTasks();
-        showNotification('Task completed, Nice work!', 'success', '<i class="fa-regular fa-face-smile"></i>');
-    }
+    updateTaskStatus(taskId, 'done');
+    showNotification('Task completed, Nice work!', 'success', '<i class="fa-regular fa-face-smile"></i>');
 }
 
 // Delete task
@@ -460,31 +418,7 @@ function deleteTask(taskId) {
     showNotification('Successfully removed from your list', 'success', '<i class="fa-solid fa-triangle-exclamation"></i>');
 }
 
-// Delete selected/completed tasks
-function deleteSelected() {
-    const completedTasks = tasks.filter(task => task.status === 'done');
-    
-    if (completedTasks.length === 0) {
-        showNotification('No completed tasks to delete', 'info');
-        return;
-    }
-    
-    showConfirmationModal(
-        'Delete all Confirmation',
-        `Are you sure you want to delete all tasks?`,
-        '<i class="fa-solid fa-triangle-exclamation"></i>',
-        'Delete',
-        'Cancel',
-        () => {
-            tasks = tasks.filter(task => task.status !== 'done');
-            saveTasksToStorage();
-            renderTasks();
-            showNotification('All tasks have been cleared', 'success', '<i class="fa-solid fa-triangle-exclamation"></i>');
-        },
-        () => {}
-    );
-}
-
+// Delete All Tasks
 function deleteAllTasks() { 
     if (tasks.length === 0) {
         showNotification('There are no tasks to delete', 'info');
@@ -492,59 +426,38 @@ function deleteAllTasks() {
     }
     
     showConfirmationModal(
-        'Delete All Tasks Confirmation', 
+        'Delete All Tasks', 
         `Are you sure you want to delete all ${tasks.length} tasks? This action cannot be undone.`,
         '<i class="fa-solid fa-triangle-exclamation"></i>',
         'Delete All',
         'Cancel',
         () => {
-           
             tasks = []; 
             saveTasksToStorage();
             renderTasks();
             showNotification('All tasks have been successfully deleted', 'success', '<i class="fa-solid fa-trash-can"></i>');
-        },
-        () => {}
+        }
     );
 }
 
 // Filter tasks
 function toggleFilter() {
-    // Simple filter toggle: all -> pending -> ongoing -> done -> all
+    const filterCycle = ['all', 'pending', 'ongoing', 'done'];
+    let currentIndex = filterCycle.indexOf(filterStatus);
+    filterStatus = filterCycle[(currentIndex + 1) % filterCycle.length];
+
     if (filterStatus === 'all') {
-        filterStatus = 'pending';
-        filterButton.innerHTML = '<span>Pending</span><i class="fa-solid fa-filter" style="margin-left: 8px;"></i>';
-    } else if (filterStatus === 'pending') {
-        filterStatus = 'ongoing';
-        filterButton.innerHTML = '<span>Ongoing</span><i class="fa-solid fa-filter" style="margin-left: 8px;"></i>';
-    } else if (filterStatus === 'ongoing') {
-        filterStatus = 'done';
-        filterButton.innerHTML = '<span>Done</span><i class="fa-solid fa-filter" style="margin-left: 8px;"></i>';
-    } else {
-        filterStatus = 'all';
         filterButton.innerHTML = '<span>Filter</span><i class="fa-solid fa-filter" style="margin-left: 8px;"></i>';
+    } else {
+        const capitalized = filterStatus.charAt(0).toUpperCase() + filterStatus.slice(1);
+        filterButton.innerHTML = `<span>${capitalized}</span><i class="fa-solid fa-filter" style="margin-left: 8px;"></i>`;
     }
     
     renderTasks();
 }
 
-// Filter tasks by progress (Work In Progress button)
-function filterTasks(status) {
-    filterStatus = status;
-    // Update filter button text to match
-    if (status === 'pending') {
-        filterButton.innerHTML = '<span>Pending</span><i class="fa-solid fa-filter" style="margin-left: 8px;"></i>';
-    } else if (status === 'ongoing') {
-        filterButton.innerHTML = '<span>Ongoing</span><i class="fa-solid fa-filter" style="margin-left: 8px;"></i>';
-    } else if (status === 'done') {
-        filterButton.innerHTML = '<span>Done</span><i class="fa-solid fa-filter" style="margin-left: 8px;"></i>';
-    }
-    renderTasks();
-}
-
 // Show notification
 function showNotification(message, type, customIcon = null) {
-    // Remove any existing notifications
     const existingNotification = document.querySelector('.notification');
     if (existingNotification) {
         existingNotification.remove();
@@ -552,58 +465,38 @@ function showNotification(message, type, customIcon = null) {
     
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
-    
     let icon = customIcon || getNotificationIcon(type);
     
     notification.innerHTML = `
         <div class="notification-content">
             <span class="notification-icon">${icon}</span>
             <span class="notification-text">${message}</span>
-        </div>
-    `;
+        </div>`;
     
     document.body.appendChild(notification);
     
-    // Add animation class
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 10);
+    setTimeout(() => notification.classList.add('show'), 10);
     
-    // Auto remove after 3 seconds
     setTimeout(() => {
         notification.classList.remove('show');
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.remove();
-            }
-        }, 300);
+        setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
 // Get icon based on notification type
 function getNotificationIcon(type) {
     switch(type) {
-        case 'success':
-            return '<i class="fa-solid fa-check"></i>'; 
-        case 'error':
-            return '<i class="fa-solid fa-triangle-exclamation"></i>'; 
-        case 'info':
-            return '<i class="fa-solid fa-circle-info"></i>';
-        default:
-            return '<i class="fa-solid fa-bell"></i>'; 
+        case 'success': return '<i class="fa-solid fa-check"></i>';
+        case 'error': return '<i class="fa-solid fa-triangle-exclamation"></i>';
+        case 'info': return '<i class="fa-solid fa-circle-info"></i>';
+        default: return '<i class="fa-solid fa-bell"></i>';
     }
 }
 
 // Click outside to close modals
 document.addEventListener('click', function(e) {
-    const editModal = document.getElementById('editModal');
-    const confirmModal = document.getElementById('confirmModal');
-    
-    if (editModal && e.target === editModal) {
+    if (e.target.matches('.modal-overlay')) {
         closeEditModal();
-    }
-    
-    if (confirmModal && e.target === confirmModal) {
         closeConfirmationModal();
     }
 });
