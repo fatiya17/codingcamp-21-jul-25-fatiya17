@@ -18,6 +18,7 @@
     --button-secondary: #fef3cf;
 }
 
+/* === BASE STYLES === */
 body {
     font-family: 'Pixelify Sans', sans-serif;
     background-color: var(--primary-bg);
@@ -39,7 +40,7 @@ body {
     color: var(--text-heading);
 }
 
-/* Motivation Card */
+/* === MOTIVATION CARD === */
 .motivation-wrapper {
     position: relative;
     display: inline-block;
@@ -47,7 +48,6 @@ body {
     width: 100%;
 }
 
-/* Love icon image di atas card */
 .pixel-love {
     position: absolute;
     top: -35px;
@@ -82,7 +82,7 @@ body {
     line-height: 1.4;
 }
 
-/* Add Task Form */
+/* === ADD TASK FORM === */
 .form-character-wrapper img {
     display: flex;
     justify-content: center;
@@ -98,7 +98,6 @@ body {
     margin-bottom: 60px;
 }
 
-/* Input with Icon */
 .form-group-horizontal {
     display: flex;
     align-items: flex-start;
@@ -110,7 +109,6 @@ body {
     flex-shrink: 0;
     width: 35px;
     height: 35px;
-    /* background-color: #eae5ab; */
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -154,7 +152,7 @@ body {
     width: 100%;
 }
 
-/* Buttons */
+/* === BUTTONS === */
 .add-button {
     font-size: 16px;
     width: 100%;
@@ -184,7 +182,7 @@ body {
     color: #9DA55D;
 }
 
-/* Controls */
+/* === CONTROLS === */
 .controls {
     display: flex;
     justify-content: space-between;
@@ -214,230 +212,95 @@ body {
     border: 2px solid #FF726D;
 }
 
-/* Table */
+/* === TASK TABLE (Desktop Grid Layout) === */
+.task-table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
 .task-table {
     border-radius: 12px;
     overflow: hidden;
     border: 2px solid #9DA55D;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: #FFF9BD;
+    min-width: 480px;
 }
 
 .table-header {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    background-color: #9DA55D; 
+    display: contents;
+}
+
+.table-header > div {
+    background-color: #9DA55D;
     color: #FFF9BD;
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 16px;
     text-align: center;
-    padding: 8px 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-bottom: 1px solid #dcd67f;
 }
 
 .table-body {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    text-align: center;
-    background-color: #FFF9BD;
-    padding: 8px 0;
-    border-top: none;
-    row-gap: 1px;
+    display: contents;
 }
 
-.table-body > div {
+.task-row {
+    display: contents;
+}
+
+.task-cell {
+    padding: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    word-break: break-word;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e2dd9e;
     border-right: 1px solid #e2dd9e;
-    padding: 8px 0;
-    font-size: 12px;
 }
 
-.table-body > div:nth-child(4n) {
+.task-row:nth-child(even) .task-cell {
+    background-color: #f7f2b9;
+}
+
+.task-row:hover .task-cell {
+    background-color: #f7f4b2;
+}
+
+.task-row:last-child .task-cell {
+    border-bottom: none;
+}
+
+.task-cell:nth-child(4n) {
     border-right: none;
 }
 
+.task-cell--actions {
+    gap: 8px;
+}
+
+.task-cell--status {
+    justify-content: center;
+}
+
 .empty-state {
-    font-family: Poppins, sans-serif;
-    grid-column: span 4;
-    padding: 16px;
-    color: #777;
-    font-size: 12px;
+    grid-column: 1 / -1;
+    padding: 20px;
+    font-size: 10px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: #b0b090;
     font-style: italic;
 }
 
-/* Footer */
-.footer {
-    background-color: #a2a35d; 
-    color: #ececc6; 
-    padding: 30px 20px;
-    text-align: center;
-    font-family: 'Pixelify Sans', sans-serif;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-bottom: 15px;
-}
-
-.social-icon {
-    font-size: 24px;
-    color: #ececc6;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-}
-
-.social-icon:hover {
-    transform: scale(1.2);
-    color: #fff;
-}
-
-.footer-text {
-    font-size: 12px;
-    color: #ececc6;
-}
-
-/* Tablet Styles (768px and above) */
-@media screen and (min-width: 768px) {
-    .container {
-        padding: 40px;
-    }
-    
-    .title {
-        font-size: 40px;
-        margin-bottom: 70px;
-    }
-    
-    .pixel-love {
-        top: -50px;
-        left: -70px;
-        width: 20%;
-    }
-    
-    .motivation-card {
-        padding: 30px 50px 30px;
-        border-radius: 25px;
-        margin-bottom: 45px;
-    }
-    
-    .motivation-card h3 {
-        font-size: 24px;
-    }
-    
-    .motivation-card p {
-        font-size: 16px;
-    }
-    
-    .form-character-wrapper img {
-        width: 18%;
-        padding-left: 25px;
-    }
-    
-    .add-task-container {
-        padding: 26px;
-        border-radius: 25px;
-        margin-bottom: 24px;
-    }
-    
-    .form-group-horizontal {
-        margin-bottom: 20px;
-        gap: 12px;
-    }
-    
-    .icon-wrapper {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        margin-top: 25px;
-    }
-    
-    .form-icon {
-        font-size: 20px;
-    }
-    
-    .form-label {
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-    
-    .form-input {
-        padding: 10px;
-        font-size: 14px;
-    }
-    
-    .add-button {
-        font-size: 16px;
-        padding: 13px;
-        border-radius: 20px;
-        margin-top: 10px;
-    }
-    
-    .status-section {
-        margin: 70px 0 22px;
-    }
-    
-    .status-button {
-        padding: 12px 70px;
-        border-radius: 12px;
-        font-size: 18px;
-    }
-    
-    .controls {
-        gap: initial;
-    }
-    
-    .filter-button,
-    .delete-button {
-        padding: 7px 25px;
-        font-size: 16px;
-    }
-    
-    .table-header {
-        font-size: 16px;
-        padding: 10px 0;
-    }
-    
-    .table-body {
-        padding: 12px 0;
-    }
-    
-    .table-body > div {
-        padding: 10px 0;
-        font-size: 14px;
-    }
-    
-    .social-links {
-        gap: 45px;
-        margin-bottom: 25px;
-    }
-    
-    .social-icon {
-        font-size: 28px;
-    }
-    
-    .footer-text {
-        font-size: 14px;
-    }
-}
-
-/* Large Tablet/Desktop Styles */
-@media screen and (min-width: 1024px) {
-    .container {
-        padding: 70px;
-    }
-}
-
-
-/* --- Mulai bagian tambahan untuk styling dinamis --- */
-
-/* Task Row Styling (dari JS) */
-.task-row:nth-child(even) {
-    background-color: #fff8c7;
-}
-.task-row:hover {
-    background-color: #f7f4b2;
-}
-/* Status Dropdown (dari JS) */
+/* === STATUS DROPDOWN === */
 .status-select {
     border: none;
     padding: 8px 16px;
@@ -448,25 +311,28 @@ body {
     outline: none;
     min-width: 80px;
     text-align: center;
-    font-family: 'Poppins', sans-serif; /* Tambahkan font yang konsisten */
+    font-family: 'Poppins', sans-serif;
 }
+
 .status-select.pending {
     background-color: #fce3e3;
     color: #a94442;
     border: #a94442 1px solid;
 }
+
 .status-select.ongoing {
     background-color: #fff6c1;
     color: #c1a600;
     border: #c1a600 1px solid;
 }
+
 .status-select.done {
     background-color: #d2f7cb;
     color: #3d8b4c;
     border: #3d8b4c 1px solid;
 }
-/* Action Buttons (dari JS) */
-/* Action Buttons */
+
+/* === ACTION BUTTONS === */
 .action-btn {
     background: none;
     border: none;
@@ -496,7 +362,8 @@ body {
     color: #FFF9BD;
     background-color: #A3DC9A;
 }
-/* Modal Overlay (dari JS) */
+
+/* === MODAL STYLES === */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -509,7 +376,11 @@ body {
     align-items: center;
     z-index: 1000;
 }
-/* Edit Modal (dari JS) */
+
+.modal-overlay.is-visible {
+    display: flex;
+}
+
 .modal-content {
     background: linear-gradient(135deg, #fff9c4, #f0f8d0);
     border-radius: 15px;
@@ -519,6 +390,7 @@ body {
     border: 2px solid #e8e8e8;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .modal-header {
     display: flex;
     align-items: center;
@@ -526,17 +398,21 @@ body {
     margin-bottom: 20px;
     color: #6b7280;
 }
+
 .modal-icon {
     font-size: 20px;
 }
+
 .modal-header h3 {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
 }
+
 .form-group {
     margin-bottom: 20px;
 }
+
 .form-group label {
     display: block;
     color: #8b9467;
@@ -544,6 +420,7 @@ body {
     margin-top: 8px;
     font-family: 'Poppins', sans-serif;
 }
+
 .input-group {
     display: flex;
     align-items: center;
@@ -552,9 +429,11 @@ body {
     padding: 12px 16px;
     gap: 12px;
 }
+
 .input-icon {
     font-size: 16px;
 }
+
 .input-group input {
     border: none;
     background: transparent;
@@ -564,9 +443,11 @@ body {
     font-size: 14px;
     color: #333;
 }
+
 .input-group input::placeholder {
     color: #666;
 }
+
 .update-btn {
     width: 100%;
     background-color: #8fbc8f;
@@ -580,10 +461,12 @@ body {
     font-family: 'Poppins', sans-serif;
     transition: background-color 0.2s ease;
 }
+
 .update-btn:hover {
     background-color: #7ba87b;
 }
-/* Confirmation Modal (dari JS) */
+
+/* === CONFIRMATION MODAL === */
 .confirmation-modal {
     background: #FFFBD7;
     color: #FF726D;
@@ -595,6 +478,7 @@ body {
     border: 2px solid #e8e8e8;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .confirmation-header {
     display: flex;
     align-items: center;
@@ -603,25 +487,30 @@ body {
     margin-bottom: 16px;
     color: #FF726D;
 }
+
 .confirmation-icon {
     font-size: 24px;
 }
+
 .confirmation-header h3 {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
 }
+
 .confirmation-message {
     color: #666;
     margin-bottom: 24px;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
 }
+
 .confirmation-buttons {
     display: flex;
     gap: 12px;
     justify-content: center;
 }
+
 .confirm-btn, .cancel-btn {
     padding: 10px 50px;
     gap: 10px;
@@ -632,23 +521,28 @@ body {
     font-weight: 500;
     transition: all 0.2s ease;
 }
+
 .confirm-btn {
     background-color: #FFD6BA;
     color: #FF726D;
 }
+
 .confirm-btn:hover {
     background-color: #FF726D;
     color: #FFD6BA;
 }
+
 .cancel-btn {
     border: #FF726D 2px solid;
     background-color: #FFFBD7;
     color: #FF726D;
 }
+
 .cancel-btn:hover {
     background-color: #FFD6BA;
 }
-/* Enhanced Notifications (dari JS) */
+
+/* === NOTIFICATIONS === */
 .notification {
     position: fixed;
     top: 20px;
@@ -666,139 +560,225 @@ body {
     min-width: 280px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .notification.show {
     transform: translateX(0);
     opacity: 1;
 }
+
 .notification.success {
     background-color: #d9f8dc;
     border-color: #a4e6b1;
     color: #2f7036;
 }
+
 .notification.error {
     background-color: #ffe5e5;
     border-color: #f5bcbc;
     color: #b74242;
 }
+
 .notification.info {
     background-color: #e2f0ff;
     border-color: #a2cbe3;
     color: #326b9c;
 }
+
 .notification-content {
     display: flex;
     align-items: center;
     gap: 12px;
 }
+
 .notification-icon {
     font-size: 18px;
     flex-shrink: 0;
 }
+
 .notification-text {
     flex: 1;
 }
-/* Responsive untuk elemen dinamis */
+
+/* === FOOTER === */
+.footer {
+    background-color: #a2a35d;
+    color: #ececc6;
+    padding: 30px 20px;
+    text-align: center;
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 15px;
+}
+
+.social-icon {
+    font-size: 24px;
+    color: #ececc6;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+    color: #fff;
+}
+
+.footer-text {
+    font-size: 12px;
+    color: #ececc6;
+}
+
+/* === RESPONSIVE STYLES === */
+
+/* Mobile Styles (Up to 767px) */
 @media (max-width: 767px) {
+    /* Notification positioning for mobile */
     .notification {
         left: 20%;
         transform: translateX(-50%);
-        width: 90%; 
-        max-width: 350px; 
+        width: 90%;
+        max-width: 350px;
     }
 
+    /* Modal sizing for mobile */
     .modal-content, .confirmation-modal {
         width: 95%;
         margin: 20px;
     }
 
-    .task-table-header,
+    /* Table becomes card layout on mobile */
+    .task-table {
+        display: block;
+        background-color: transparent;
+        min-width: auto;
+        border: none;
+    }
+
+    .table-header {
+        display: none;
+    }
+
+    .table-body {
+        display: block;
+        background-color: transparent;
+        border: none;
+    }
+
     .task-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr; 
-        gap: 6px;
-        padding: 0 8px;
-        font-size: 12px;
+        display: block !important;
+        background-color: #FFF9BD;
+        border: 2px solid #9DA55D;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        padding: 12px;
     }
 
     .task-cell {
-        font-size: 12px;
-        padding: 8px;
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 17px 5px;
+        font-size: 15px;
+        text-align: right;
+        border-bottom: 1px solid #eae5ab;
+        border-right: none;
+        background-color: transparent !important;
     }
 
-    .task-cell--actions {
-        flex-wrap: wrap;
+    .task-row .task-cell:last-child {
+        border-bottom: none;
+    }
+
+    .task-cell::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-align: left;
+        color: var(--text-subheading);
+    }
+
+    .task-cell[data-label="Task"] {
+        font-family: poppins, sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--text-heading);
         justify-content: center;
+        padding-bottom: 10px;
+        border-bottom-width: 2px;
+    }
+
+    .task-cell[data-label="Task"]::before {
+        display: none;
+    }
+
+    /* Fix: Due Date alignment - left */
+    .task-cell[data-label="Due Date"] {
+        justify-content: flex-start;
+    }
+
+    .task-cell[data-label="Due Date"]::before {
+        flex: 1;
+        text-align: left;
+    }
+
+    /* Fix: Status alignment - right */
+    .task-cell[data-label="Status"] {
+        justify-content: flex-end;
+    }
+
+    .task-cell[data-label="Status"]::before {
+        margin-right: auto;
+    }
+
+    /* Fix: Actions alignment - spread across */
+    .task-cell--actions {
+        justify-content: space-between;
         gap: 6px;
+        flex-wrap: nowrap;
+    }
+
+    .task-cell--actions::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-align: left;
+        color: var(--text-subheading);
+        margin-right: auto;
     }
 
     .status-select {
-        font-size: 11px;
+        font-size: 14px;
         padding: 6px 10px;
         min-width: 70px;
         border-radius: 12px;
     }
 
     .action-btn {
-        width: 24px;
-        height: 24px;
-        font-size: 12px;
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
     }
 }
 
-/* === Gaya untuk Elemen yang Dibuat oleh JS === */
-.task-cell {
-    padding: 12px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    word-break: break-word; /* Untuk judul agar tidak keluar dari kotak */
-    display: flex; 
-    align-items: center; 
-}
-
-.task-cell--actions {
-    justify-content: center; 
-    gap: 8px;
-}
-
-/* Penataan khusus untuk sel Status (dropdown) */
-.task-cell--status {
-    justify-content: center; 
-}
-
-.empty-state {
-    grid-column: span 4; 
-}
-
-.modal-overlay.is-visible {
-    display: flex; 
-}
-
+/* Very Small Mobile (500px and below) */
 @media (max-width: 500px) {
-    .task-table-header,
-    .task-row {
-        font-size: 9px;
-        gap: 3px;
-        padding: 0 2px;
-    }
-
     .task-cell {
-        padding: 4px;
-        font-size: 9px;
+        padding: 6px;
+        font-size: 13px;
     }
 
     .status-select {
-        font-size: 9px;
+        font-size: 14px;
         padding: 3px 6px;
         min-width: 58px;
     }
 
     .action-btn {
-        width: 18px;
-        height: 18px;
-        font-size: 9px;
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
     }
 
     .task-cell svg {
@@ -829,6 +809,9 @@ body {
     .confirmation-message {
         font-size: 10px;
         margin-bottom: 12px;
+        text-align: center;
+        margin-left: 25px;
+        margin-right: 25px;
     }
 
     .input-group input {
@@ -862,35 +845,144 @@ body {
     }
 
     .confirmation-body {
-    flex-direction: column; 
-    gap: 12px;
-    text-align: center;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .confirmation-buttons {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+
+    .confirmation-buttons button {
+        width: 100%;
+    }
 }
 
-.confirmation-message {
-    text-align: center; 
-    margin-left: 25px;
-    margin-right: 25px;
+/* Tablet Styles (768px and above) */
+@media screen and (min-width: 768px) {
+    .container {
+        padding: 40px;
+    }
+
+    .title {
+        font-size: 40px;
+        margin-bottom: 70px;
+    }
+
+    .pixel-love {
+        top: -50px;
+        left: -70px;
+        width: 20%;
+    }
+
+    .motivation-card {
+        padding: 30px 50px 30px;
+        border-radius: 25px;
+        margin-bottom: 45px;
+    }
+
+    .motivation-card h3 {
+        font-size: 24px;
+    }
+
+    .motivation-card p {
+        font-size: 16px;
+    }
+
+    .form-character-wrapper img {
+        width: 18%;
+        padding-left: 25px;
+    }
+
+    .add-task-container {
+        padding: 26px;
+        border-radius: 25px;
+        margin-bottom: 24px;
+    }
+
+    .form-group-horizontal {
+        margin-bottom: 20px;
+        gap: 12px;
+    }
+
+    .icon-wrapper {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        margin-top: 25px;
+    }
+
+    .form-icon {
+        font-size: 20px;
+    }
+
+    .form-label {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .form-input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .add-button {
+        font-size: 16px;
+        padding: 13px;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+
+    .status-section {
+        margin: 70px 0 22px;
+    }
+
+    .status-button {
+        padding: 12px 70px;
+        border-radius: 12px;
+        font-size: 18px;
+    }
+
+    .controls {
+        gap: initial;
+    }
+
+    .filter-button,
+    .delete-button {
+        padding: 7px 25px;
+        font-size: 16px;
+    }
+
+    .table-header > div {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
+    .task-cell {
+        padding: 12px 0;
+        font-size: 14px;
+    }
+
+    .social-links {
+        gap: 45px;
+        margin-bottom: 25px;
+    }
+
+    .social-icon {
+        font-size: 28px;
+    }
+
+    .footer-text {
+        font-size: 14px;
+    }
 }
 
-.confirmation-buttons {
-    flex-direction: column; 
-    gap: 8px;
-    align-items: stretch;
-}
-
-.confirmation-buttons button {
-    width: 100%; 
-}
-}
-
-/* Horizontal scroll untuk grid jika terlalu sempit */
-.task-table-wrapper {
-    overflow-x: auto;
-    width: 100%;
-}
-
-.task-table-header,
-.task-row {
-    min-width: 480px;
+/* Large Tablet/Desktop Styles */
+@media screen and (min-width: 1024px) {
+    .container {
+        padding: 70px;
+    }
 }
