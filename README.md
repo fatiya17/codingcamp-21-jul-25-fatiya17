@@ -1,6 +1,6 @@
 # 📝 To-Do List App | Proyek Coding Camp RevoU
 
-Aplikasi web **To-Do List** sederhana namun fungsional yang dibuat sebagai mini-project untuk **Coding Camp RevoU**. Aplikasi ini dirancang untuk membantu pengguna mengelola tugas harian dengan antarmuka yang bersih dan intuitif. Dibangun sepenuhnya menggunakan **HTML, CSS, dan JavaScript murni** (Vanilla JS) untuk mempraktikkan dasar-dasar pengembangan web front-end.
+Aplikasi web **To-Do List** sederhana namun fungsional yang dibuat sebagai mini-project untuk **Coding Camp RevoU**. Aplikasi ini dirancang untuk membantu pengguna mengelola tugas harian dengan antarmuka yang bersih dan intuitif. Dibangun sepenuhnya menggunakan **HTML, CSS, dan JavaScript murni** untuk mempraktikkan dasar-dasar pengembangan web front-end, UI yang dibuat dengan menggunakan tema **Pixel**.
 
 ---
 ## ✨ Fitur Utama
@@ -22,7 +22,6 @@ Aplikasi web **To-Do List** sederhana namun fungsional yang dibuat sebagai mini-
 -   **Penyimpanan Data**: Web Storage API (Local Storage)
 -   **Ikon**: Font Awesome
 -   **Font**: Google Fonts (Poppins & Pixelify Sans)
--   **Library Tambahan**: Choices.js (untuk dropdown kustom)
 
 ---
 ## 📂 Struktur Folder Proyek
@@ -30,17 +29,13 @@ Aplikasi web **To-Do List** sederhana namun fungsional yang dibuat sebagai mini-
 ```bash
 .
 ├── assets/
-│   ├── favicon.png
+│   ├── tampilan-aplikasi.png
 │   ├── kartun.png
 │   └── love.png
 ├── css/
 │   └── style.css
 ├── js/
 │   └── script.js
-├── screenshots/
-│   ├── home-view.png
-│   ├── edit-modal.png
-│   └── delete-confirmation.png
 └── index.html
 ```
 
@@ -62,4 +57,4 @@ Proyek ini dibuat untuk menyelesaikan Mini Project Coding Camp oleh **RevoU**, b
 
 **Pengembang**:  
 🧑‍💻 *Fatiya Labibah*  
-🎓  *Coding Camp RevoU - 21 Jul 25*  
+🎓  *Coding Camp RevoU - 21-25 July 2025*  
