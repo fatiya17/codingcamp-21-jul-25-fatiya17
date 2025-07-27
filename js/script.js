@@ -316,9 +316,8 @@ function updateTaskStatus(taskId, newStatus) {
         // Force save to storage
         const saveResult = saveTasksToStorage();
 
-        if (filterStatus !== 'all' && oldStatus !== newStatus) {
-            renderTasks(); // Re-render if the task should disappear from the current filter
-        }
+        // Always re-render to update the status dropdown display
+        renderTasks();
         
         showNotification(`Task status updated to ${newStatus}`, 'success');
     } 
@@ -421,11 +420,11 @@ function showDeleteConfirmation(taskId) {
 // Show done confirmation
 function showDoneConfirmation(taskId) {
     showConfirmationModal(
-        'Done Task',
-        `Ready to check it off?`,
+        'Mark as Done',
+        `Ready to mark this task as completed?`,
         '<i class="fa-solid fa-clipboard-check"></i>',
-        'Done',
-        'Not yet',
+        'Mark Done',
+        'Cancel',
         () => markTaskAsDone(taskId)
     );
 }
