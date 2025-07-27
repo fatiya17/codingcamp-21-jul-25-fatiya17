@@ -7,15 +7,38 @@ const filterButton = document.querySelector('.filter-button');
 const deleteButton = document.querySelector('.delete-button');
 const statusButton = document.querySelector('.status-button');
 
-// Task data storage
+// Task data storage with fallback system
 let tasks = [];
 let filterStatus = 'all'; // 'all', 'pending', 'ongoing', 'done'
 let editingTaskId = null;
 
+// Storage fallback system
+let storageAvailable = false;
+
+// Check if storage is available
+function checkStorageAvailability() {
+    try {
+        if (typeof Storage !== "undefined" && localStorage) {
+            localStorage.setItem('test', 'test');
+            localStorage.removeItem('test');
+            storageAvailable = true;
+            return true;
+        }
+    } catch (error) {
+        storageAvailable = false;
+        return false;
+    }
+    return false;
+}
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
-    // Load tasks from localStorage if available
+    // Check storage availability
+    checkStorageAvailability();
+    
+    // Load tasks from storage first
     loadTasksFromStorage();
+    
     renderTasks();
     
     // Set today's date as default
@@ -25,6 +48,60 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create edit modal
     createEditModal();
 });
+
+// Enhanced save function with multiple fallbacks
+function saveTasksToStorage() {
+    
+    if (storageAvailable) {
+        try {
+            localStorage.setItem('todoTasks', JSON.stringify(tasks));
+            return true;
+        } catch (error) {
+            try {
+                sessionStorage.setItem('todoTasks', JSON.stringify(tasks));
+                return true;
+            } catch (error2) {
+                return false;
+            }
+        }
+    } else {
+        // For environments without storage, use a global variable as backup
+        window.todoTasksBackup = JSON.parse(JSON.stringify(tasks));
+        return true;
+    }
+}
+
+// Enhanced load function with multiple fallbacks
+function loadTasksFromStorage() {
+    
+    if (storageAvailable) {
+        try {
+            const storedTasks = localStorage.getItem('todoTasks');
+            if (storedTasks) {
+                tasks = JSON.parse(storedTasks);
+                return true;
+            }
+        } catch (error) {
+            try {
+                const storedTasks = sessionStorage.getItem('todoTasks');
+                if (storedTasks) {
+                    tasks = JSON.parse(storedTasks);
+                    return true;
+                }
+            } catch (error2) {
+            }
+        }
+    }
+    
+    // Fallback to global variable
+    if (window.todoTasksBackup) {
+        tasks = JSON.parse(JSON.stringify(window.todoTasksBackup));
+        return true;
+    }
+    
+    tasks = [];
+    return false;
+}
 
 // Form submission handler
 taskForm.addEventListener('submit', function(e) {
@@ -87,39 +164,21 @@ function updateTask(taskId, title, date) {
     }
 }
 
-// Save tasks to localStorage
-function saveTasksToStorage() {
-    localStorage.setItem('todoTasks', JSON.stringify(tasks));
-}
-
-// Load tasks from localStorage
-function loadTasksFromStorage() {
-    const storedTasks = localStorage.getItem('todoTasks');
-    if (storedTasks) {
-        tasks = JSON.parse(storedTasks);
-    }
-}
-
 // Render tasks to the table
 function renderTasks() {
-    // Hancurkan instance Choices yang lama jika ada (jika Anda menggunakannya)
-    if (window.choiceInstances && choiceInstances.length > 0) {
-        choiceInstances.forEach(instance => instance.destroy());
-        choiceInstances = [];
-    }
-
+    // Clear existing content
     taskTableBody.innerHTML = '';
 
-    // 1. Urutkan tugas berdasarkan tanggal (dari yang paling dekat ke paling jauh)
+    // 1. Sort tasks by date (closest to furthest)
     const sortedTasks = [...tasks].sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    // 2. Filter tugas dari array yang SUDAH diurutkan
+    // 2. Filter tasks from the ALREADY sorted array
     let filteredTasks = sortedTasks;
     if (filterStatus !== 'all') {
         filteredTasks = sortedTasks.filter(task => task.status === filterStatus);
     }
 
-    // 3. Render tugas yang sudah diurutkan dan difilter
+    // 3. Render sorted and filtered tasks
     if (filteredTasks.length === 0) {
         const emptyState = document.createElement('div');
         emptyState.className = 'empty-state';
@@ -149,44 +208,49 @@ function getEmptyStateMessage() {
 
 // Create task row element
 function createTaskRow(task) {
+    
     const row = document.createElement('div');
-    row.className = 'task-row'; // Just the class name, no inline style
+    row.className = 'task-row';
 
     // Task title
     const titleCell = document.createElement('div');
     titleCell.textContent = task.title;
     titleCell.className = 'task-cell';
-    titleCell.setAttribute('data-label', 'Task'); // Data label for mobile view
+    titleCell.setAttribute('data-label', 'Task');
 
     // Due date
     const dateCell = document.createElement('div');
     dateCell.textContent = formatDate(task.date);
     dateCell.className = 'task-cell';
-    dateCell.setAttribute('data-label', 'Due Date'); // Data label for mobile view
+    dateCell.setAttribute('data-label', 'Due Date');
 
     // Status dropdown
     const statusCell = document.createElement('div');
     statusCell.className = 'task-cell task-cell--status';
-    statusCell.setAttribute('data-label', 'Status'); // Data label for mobile view
+    statusCell.setAttribute('data-label', 'Status');
     const statusSelect = document.createElement('select');
-    statusSelect.value = task.status;
+    statusSelect.value = task.status; // This should correctly set the current status
     statusSelect.className = `status-select ${task.status}`;
+    
     statusSelect.addEventListener('change', function() {
-        const oldStatus = task.status;
-        updateTaskStatus(task.id, this.value);
-        if (this.parentElement) {
-            this.className = `status-select ${this.value}`;
-        }
+        const newStatus = this.value;
+        updateTaskStatus(task.id, newStatus);
+        this.className = `status-select ${newStatus}`;
     });
+    
     const statusOptions = [
         { value: 'pending', text: 'Pending' },
         { value: 'ongoing', text: 'Ongoing' },
         { value: 'done', text: 'Done' }
     ];
+    
     statusOptions.forEach(option => {
         const opt = document.createElement('option');
         opt.value = option.value;
         opt.textContent = option.text;
+        if (option.value === task.status) {
+            opt.selected = true; // Explicitly set selected
+        }
         statusSelect.appendChild(opt);
     });
     statusCell.appendChild(statusSelect);
@@ -194,7 +258,7 @@ function createTaskRow(task) {
     // Action buttons
     const actionCell = document.createElement('div');
     actionCell.className = 'task-cell task-cell--actions';
-    actionCell.setAttribute('data-label', 'Action'); // Data label for mobile view
+    actionCell.setAttribute('data-label', 'Action');
 
     // Delete button (red X)
     const deleteBtn = document.createElement('button');
@@ -243,18 +307,21 @@ function formatDate(dateString) {
 
 // Update task status
 function updateTaskStatus(taskId, newStatus) {
+    
     const task = tasks.find(t => t.id === taskId);
     if (task) {
         const oldStatus = task.status;
         task.status = newStatus;
-        saveTasksToStorage();
+        
+        // Force save to storage
+        const saveResult = saveTasksToStorage();
 
         if (filterStatus !== 'all' && oldStatus !== newStatus) {
             renderTasks(); // Re-render if the task should disappear from the current filter
         }
         
         showNotification(`Task status updated to ${newStatus}`, 'success');
-    }
+    } 
 }
 
 // Create edit modal
@@ -500,3 +567,7 @@ document.addEventListener('click', function(e) {
         closeConfirmationModal();
     }
 });
+
+// Event listeners for buttons
+filterButton.addEventListener('click', toggleFilter);
+deleteButton.addEventListener('click', deleteAllTasks);
